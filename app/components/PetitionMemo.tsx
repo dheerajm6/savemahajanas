@@ -170,12 +170,10 @@ export default function PetitionMemo({ isCompact = false }: PetitionMemoProps) {
             <ul className={`list-disc list-inside space-y-1 ml-4 ${isCompact ? 'text-xs' : ''}`}>
               <li>The institution remains under government-aided status</li>
               <li>Fees remain controlled and affordable</li>
-              <li>Scholarships and merit-based aid continue</li>
-              <li>Public education remains a right, not a privilege</li>
             </ul>
 
             <p className="text-justify font-semibold mt-3">
-              By signing below, we declare our commitment to protecting SBRR Mahajans as a public institution.
+              By signing below, we declare our commitment to protecting SBRR Mahajans as a government aided institution.
             </p>
           </div>
 
