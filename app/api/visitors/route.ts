@@ -1,3 +1,5 @@
+// Simple in-memory counter for the current server instance
+// In production, use a real database like Firebase, Supabase, or MongoDB
 let visitorCount = 0;
 
 export async function POST(request: Request) {
