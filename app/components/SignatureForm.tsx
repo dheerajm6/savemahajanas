@@ -53,7 +53,7 @@ export default function SignatureForm({ onSubmit }: SignatureFormProps) {
     <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg">
       <h3 className="text-2xl font-bold text-gray-900 mb-2">Add Your Signature</h3>
       <p className="text-gray-600 mb-6">
-        Sign the petition to save SBRR Mahajans from privatization
+        Sign the petition to save SBRR Mahajanas from privatization
       </p>
 
       {submitted && (

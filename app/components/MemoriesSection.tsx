@@ -13,10 +13,10 @@ export default function MemoriesSection() {
         {/* Section Header */}
         <div className="text-center mb-10 sm:mb-16 lg:mb-20">
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 text-gray-900">
-            Your Mahajans Story Matters
+            Your Mahajanas Story Matters
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Every moment. Every memory. Every voice. Share what Mahajans means to you on Instagram.
+            Every moment. Every memory. Every voice. Share what Mahajanas means to you on Instagram.
           </p>
         </div>
 
@@ -38,12 +38,12 @@ export default function MemoriesSection() {
 
               <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-lg p-4 sm:p-6 border-2 border-red-200 hover:border-red-400 transition shadow-md">
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-red-700">🤝 Friendships Forever</h3>
-                <p className="text-sm sm:text-base text-gray-700">Those bonds formed in corridors and cafeterias. Friends you made for life at Mahajans.</p>
+                <p className="text-sm sm:text-base text-gray-700">Those bonds formed in corridors and cafeterias. Friends you made for life at Mahajanas.</p>
               </div>
 
               <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-lg p-4 sm:p-6 border-2 border-red-200 hover:border-red-400 transition shadow-md">
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-red-700">💫 Life-Changing Stories</h3>
-                <p className="text-sm sm:text-base text-gray-700">How Mahajans transformed your future. The opportunities. The growth. The journey.</p>
+                <p className="text-sm sm:text-base text-gray-700">How Mahajanas transformed your future. The opportunities. The growth. The journey.</p>
               </div>
             </div>
 
@@ -51,9 +51,9 @@ export default function MemoriesSection() {
             <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-lg p-4 sm:p-6 lg:p-8 border border-red-500 shadow-lg">
               <p className="text-base sm:text-lg font-bold mb-2 sm:mb-3 text-white">Why share your story?</p>
               <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-white">
-                <li>✓ Preserve Mahajans' rich legacy</li>
+                <li>✓ Preserve Mahajanas' rich legacy</li>
                 <li>✓ Inspire current and future students</li>
-                <li>✓ Show the world what makes Mahajans special</li>
+                <li>✓ Show the world what makes Mahajanas special</li>
                 <li>✓ Build a stronger community</li>
               </ul>
             </div>
@@ -88,14 +88,14 @@ export default function MemoriesSection() {
 
               <div className="bg-gray-100 rounded-lg p-3 sm:p-4 text-center">
                 <p className="text-xs text-gray-600 mb-1 sm:mb-2">Use our hashtag</p>
-                <p className="text-base sm:text-lg font-bold text-red-600">#SaveMahajans</p>
+                <p className="text-base sm:text-lg font-bold text-red-600">#SaveMahajanas</p>
               </div>
             </div>
 
             {/* Additional Info */}
             <div className="mt-4 sm:mt-6 lg:mt-8 text-center max-w-sm px-4">
               <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                Your stories are what make Mahajans stronger. Share. Connect. Inspire. Together, we preserve the legacy.
+                Your stories are what make Mahajanas stronger. Share. Connect. Inspire. Together, we preserve the legacy.
               </p>
             </div>
           </div>

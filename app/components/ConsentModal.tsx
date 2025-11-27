@@ -26,7 +26,7 @@ export default function ConsentModal({ onConsent }: ConsentModalProps) {
 
         <div className="text-gray-700 space-y-2 sm:space-y-4 mb-6">
           <p className="text-sm sm:text-base">
-            This website is created to showcase the <strong>unity of people and students</strong> in our effort to prevent the privatization of <strong>SBRR Mahajans PU & First Grade College</strong>.
+            This website is created to showcase the <strong>unity of people and students</strong> in our effort to prevent the privatization of <strong>SBRR Mahajanas PU & First Grade College</strong>.
           </p>
 
           <p className="text-sm sm:text-base">
@@ -40,7 +40,7 @@ export default function ConsentModal({ onConsent }: ConsentModalProps) {
           </ul>
 
           <p className="text-xs sm:text-sm text-gray-600 italic">
-            Your signature represents your commitment to keeping SBRR Mahajans as a public institution serving our community.
+            Your signature represents your commitment to keeping SBRR Mahajanas as a public institution serving our community.
           </p>
         </div>
 

@@ -150,14 +150,14 @@ export default function PetitionMemo({ isCompact = false }: PetitionMemoProps) {
               PETITION
             </h2>
             <p className={`text-gray-700 font-semibold ${isCompact ? 'text-sm' : 'text-lg'}`}>
-              Against the Privatization of SBRR Mahajans PU & First Grade College
+              Against the Privatization of SBRR Mahajanas PU & First Grade College
             </p>
           </div>
 
           {/* Petition Content */}
           <div className={`space-y-2 sm:space-y-3 text-gray-800 leading-relaxed ${isCompact ? 'mb-4 sm:mb-6 text-xs sm:text-sm' : 'mb-8 sm:mb-12 text-sm sm:text-base'}`}>
             <p className="text-justify">
-              We, the undersigned students, alumni, and citizens of this community, formally petition against the privatization of SBRR Mahajans PU & First Grade College. This institution has been a beacon of affordable, quality public education for generations.
+              We, the undersigned students, alumni, and citizens of this community, formally petition against the privatization of SBRR Mahajanas PU & First Grade College. This institution has been a beacon of affordable, quality public education for generations.
             </p>
 
             <p className="text-justify font-semibold text-red-600">
@@ -173,7 +173,7 @@ export default function PetitionMemo({ isCompact = false }: PetitionMemoProps) {
             </ul>
 
             <p className="text-justify font-semibold mt-3">
-              By signing below, we declare our commitment to protecting SBRR Mahajans as a government aided institution.
+              By signing below, we declare our commitment to protecting SBRR Mahajanas as a government aided institution.
             </p>
           </div>
 

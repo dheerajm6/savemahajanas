@@ -62,7 +62,7 @@ export default function ImageCarousel({ items, fullHeight = false }: ImageCarous
             <p className="text-xs sm:text-base lg:text-lg text-gray-900 mb-4 sm:mb-6 leading-relaxed animate-fade-in-delay">
               Education is not a commodity to be sold.
               <br />
-              <span className="font-semibold">SBRR Mahajans belongs to the people—not the profit seekers.</span>
+              <span className="font-semibold">SBRR Mahajanas belongs to the people—not the profit seekers.</span>
             </p>
             <p className="text-xs sm:text-sm lg:text-base text-gray-800 mb-6 sm:mb-8 animate-fade-in-delay-2">
               Stand with us. Sign the petition. Preserve public education.

@@ -17,17 +17,17 @@ export default function Home() {
     {
       id: 1,
       src: '/sbrr-mahajana-first-grade-college-mysore-70722.png',
-      alt: 'SBRR Mahajans College Campus',
+      alt: 'SBRR Mahajanas College Campus',
     },
     {
       id: 2,
       src: '/sbrr-mahajana-first-grade-college-mysore-70723.png',
-      alt: 'SBRR Mahajans College Building',
+      alt: 'SBRR Mahajanas College Building',
     },
     {
       id: 3,
       src: '/sbrr-mahajana-first-grade-college-mysore-70724.png',
-      alt: 'SBRR Mahajans College View',
+      alt: 'SBRR Mahajanas College View',
     },
   ];
 

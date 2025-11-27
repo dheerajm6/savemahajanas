@@ -15,7 +15,7 @@ You need:
 
 1. Go to [Google Sheets](https://sheets.google.com)
 2. Click "Create a new spreadsheet"
-3. Name it something like "SBRR Mahajans Petition Signatures"
+3. Name it something like "SBRR Mahajanas Petition Signatures"
 4. Add column headers in the first row:
    - A1: `Name`
    - B1: `Email`

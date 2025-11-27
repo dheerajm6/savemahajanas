@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Save SBRR Mahajans - Stop Privatization",
-  description: "Join the campaign to save SBRR Mahajans PU & First Grade College from privatization. Sign the petition and show your support.",
+  title: "Save SBRR Mahajanas - Stop Privatization",
+  description: "Join the campaign to save SBRR Mahajanas PU & First Grade College from privatization. Sign the petition and show your support.",
 };
 
 export default function RootLayout({
