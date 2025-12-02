@@ -58,7 +58,7 @@ export default function MemoSection() {
 
             <div className="space-y-6 text-gray-700 leading-relaxed">
               <p>
-                <span className="font-bold text-lg text-red-600">SBRR Mahajanas is NOT for sale.</span> For generations, this institution has been the beacon of affordable, quality education. Government-aided status meant that brilliant minds from every economic background could access world-class learning. That's not a weakness—that's our strength.
+                <span className="font-bold text-lg text-red-600">Objective of Mahajana - Public welfare.</span> For generations, this institution has been the beacon of affordable, quality education. Government-aided status meant that brilliant minds from every economic background could access world-class learning. That's not a weakness—that's our strength.
               </p>
 
               <p>
