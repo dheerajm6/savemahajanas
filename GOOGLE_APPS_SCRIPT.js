@@ -164,29 +164,47 @@ function handleGetSignatureCount(e) {
     let publicCount = 0;
     let total = 0;
 
-    if (signaturesSheet) {
-      const lastRow = signaturesSheet.getLastRow();
-      if (lastRow > 1) {
-        // Get all data (skip header row)
-        const data = signaturesSheet.getRange(2, 1, lastRow - 1, 4).getValues();
+    if (!signaturesSheet) {
+      // Sheet not found, try to get all sheet names for debugging
+      const allSheets = spreadsheet.getSheets();
+      const sheetNames = allSheets.map(s => s.getName());
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'error',
+        message: 'Sheet "signed" not found. Available sheets: ' + sheetNames.join(', ')
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
 
-        for (let i = 0; i < data.length; i++) {
-          const row = data[i];
-          // Row structure: [Name, Email, Category, Timestamp]
-          const category = row[2]; // Category is in column 3 (0-indexed: column 2)
+    const lastRow = signaturesSheet.getLastRow();
 
-          if (category) {
-            const categoryLower = category.toString().toLowerCase().trim();
-            if (categoryLower === 'student') {
-              studentCount++;
-            } else if (categoryLower === 'alumni') {
-              alumniCount++;
-            } else if (categoryLower === 'public') {
-              publicCount++;
-            }
-            total++;
-          }
+    if (lastRow <= 1) {
+      // No data rows
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'success',
+        students: 0,
+        alumni: 0,
+        public: 0,
+        total: 0
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Get all data (skip header row)
+    const data = signaturesSheet.getRange(2, 1, lastRow - 1, 4).getValues();
+
+    for (let i = 0; i < data.length; i++) {
+      const row = data[i];
+      // Row structure: [Name, Email, Category, Timestamp]
+      const category = row[2]; // Category is in column 3 (0-indexed: column 2)
+
+      if (category) {
+        const categoryLower = category.toString().toLowerCase().trim();
+        if (categoryLower === 'student') {
+          studentCount++;
+        } else if (categoryLower === 'alumni') {
+          alumniCount++;
+        } else if (categoryLower === 'public') {
+          publicCount++;
         }
+        total++;
       }
     }
 
@@ -205,7 +223,7 @@ function handleGetSignatureCount(e) {
       alumni: 0,
       public: 0,
       total: 0,
-      message: error.toString()
+      message: 'Error: ' + error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
   }
 }
