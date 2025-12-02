@@ -14,6 +14,10 @@ function doPost(e) {
       return handleGetVisitorCount(e);
     }
 
+    if (action === 'getSignatureCount') {
+      return handleGetSignatureCount(e);
+    }
+
     // Otherwise, handle signature submission
     return handleSignature(e);
 
@@ -121,6 +125,51 @@ function handleGetVisitorCount(e) {
     return ContentService.createTextOutput(JSON.stringify({
       status: 'error',
       count: 0,
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function handleGetSignatureCount(e) {
+  try {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const signaturesSheet = spreadsheet.getSheetByName('Signatures');
+
+    let studentCount = 0;
+    let alumniCount = 0;
+    let publicCount = 0;
+
+    if (signaturesSheet) {
+      const lastRow = signaturesSheet.getLastRow();
+      if (lastRow > 1) {
+        // Get all data (skip header row)
+        const data = signaturesSheet.getRange(2, 1, lastRow - 1, 4).getValues();
+        for (let i = 0; i < data.length; i++) {
+          const category = data[i][2]; // Category is in column 3 (0-indexed column 2)
+          if (category === 'student') {
+            studentCount++;
+          } else if (category === 'alumni') {
+            alumniCount++;
+          } else if (category === 'public') {
+            publicCount++;
+          }
+        }
+      }
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      students: studentCount,
+      alumni: alumniCount,
+      public: publicCount
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      students: 0,
+      alumni: 0,
+      public: 0,
       message: error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
   }

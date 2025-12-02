@@ -5,6 +5,54 @@ interface SignatureData {
   timestamp: string;
 }
 
+export async function GET(request: Request) {
+  try {
+    const APPS_SCRIPT_URL = process.env.GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL;
+
+    if (!APPS_SCRIPT_URL) {
+      return Response.json(
+        { students: 0, alumni: 0, public: 0, total: 0 },
+        { status: 200 }
+      );
+    }
+
+    const params = new URLSearchParams({
+      action: 'getSignatureCount',
+    });
+
+    const response = await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return Response.json(
+        {
+          students: data.students || 0,
+          alumni: data.alumni || 0,
+          public: data.public || 0,
+          total: (data.students || 0) + (data.alumni || 0) + (data.public || 0),
+        },
+        { status: 200 }
+      );
+    }
+
+    return Response.json(
+      { students: 0, alumni: 0, public: 0, total: 0 },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Error fetching signature count:', error);
+    return Response.json(
+      { students: 0, alumni: 0, public: 0, total: 0 },
+      { status: 200 }
+    );
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body: SignatureData = await request.json();

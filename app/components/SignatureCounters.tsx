@@ -16,22 +16,40 @@ export default function SignatureCounters() {
   });
 
   useEffect(() => {
-    // Load from localStorage
-    const loadCounters = () => {
-      const savedSignatures = localStorage.getItem('petitionSignatures');
-      if (savedSignatures) {
-        try {
-          const signatures = JSON.parse(savedSignatures);
-          const studentCount = signatures.filter((s: any) => s.category === 'student').length;
-          const alumniCount = signatures.filter((s: any) => s.category === 'alumni').length;
-          const publicCount = signatures.filter((s: any) => s.category === 'public').length;
+    // Fetch signature counts from API
+    const loadCounters = async () => {
+      try {
+        const response = await fetch('/api/signatures', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
           setCounters({
-            students: studentCount,
-            alumni: alumniCount,
-            public: publicCount,
+            students: data.students || 0,
+            alumni: data.alumni || 0,
+            public: data.public || 0,
           });
-        } catch (error) {
-          console.error('Error loading signatures:', error);
+        }
+      } catch (error) {
+        console.error('Error loading signature counts:', error);
+        // Fallback to localStorage
+        try {
+          const savedSignatures = localStorage.getItem('petitionSignatures');
+          if (savedSignatures) {
+            const signatures = JSON.parse(savedSignatures);
+            const studentCount = signatures.filter((s: any) => s.category === 'student').length;
+            const alumniCount = signatures.filter((s: any) => s.category === 'alumni').length;
+            const publicCount = signatures.filter((s: any) => s.category === 'public').length;
+            setCounters({
+              students: studentCount,
+              alumni: alumniCount,
+              public: publicCount,
+            });
+          }
+        } catch (localError) {
+          console.error('Error loading from localStorage:', localError);
         }
       }
     };
@@ -40,8 +58,13 @@ export default function SignatureCounters() {
 
     // Listen for new signatures
     window.addEventListener('signatureAdded', loadCounters);
+
+    // Refresh count every 5 seconds to sync with Google Sheets
+    const interval = setInterval(loadCounters, 5000);
+
     return () => {
       window.removeEventListener('signatureAdded', loadCounters);
+      clearInterval(interval);
     };
   }, []);
 
