@@ -6,7 +6,6 @@ import VisitorCounter from './components/VisitorCounter';
 import ImageCarousel from './components/ImageCarousel';
 import MemoSection from './components/MemoSection';
 import SignatureCounters from './components/SignatureCounters';
-import SignatureBoardSection from './components/SignatureBoardSection';
 import MemoriesSection from './components/MemoriesSection';
 import MessageSection from './components/MessageSection';
 
@@ -58,9 +57,6 @@ export default function Home() {
 
       {/* Memo Section with Petition */}
       <MemoSection />
-
-      {/* Signature Board - Wall of Support */}
-      <SignatureBoardSection />
 
       {/* Signature Counters */}
       <SignatureCounters />
