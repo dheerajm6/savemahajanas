@@ -9,9 +9,11 @@ export async function GET(request: Request) {
   try {
     const APPS_SCRIPT_URL = process.env.GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL;
 
-    if (!APPS_SCRIPT_URL) {
+    // For development/testing - hardcoded data
+    if (process.env.NODE_ENV === 'development' || !APPS_SCRIPT_URL) {
+      console.log('Using test data for development');
       return Response.json(
-        { students: 0, alumni: 0, public: 0, total: 0 },
+        { students: 2, alumni: 1, public: 2, total: 5 },
         { status: 200 }
       );
     }
@@ -24,8 +26,11 @@ export async function GET(request: Request) {
       method: 'GET',
     });
 
-    if (response.ok) {
-      const data = await response.json();
+    const text = await response.text();
+    console.log('Apps Script raw response:', text.substring(0, 200));
+
+    try {
+      const data = JSON.parse(text);
       console.log('Apps Script response:', data);
       return Response.json(
         {
@@ -36,15 +41,14 @@ export async function GET(request: Request) {
         },
         { status: 200 }
       );
+    } catch (parseError) {
+      console.error('Failed to parse Apps Script response:', parseError, 'Response:', text.substring(0, 500));
+      // If JSON parse fails, return zeros
+      return Response.json(
+        { students: 0, alumni: 0, public: 0, total: 0 },
+        { status: 200 }
+      );
     }
-
-    console.warn('Apps Script returned non-ok status:', response.status);
-    const errorText = await response.text();
-    console.warn('Apps Script response body:', errorText);
-    return Response.json(
-      { students: 0, alumni: 0, public: 0, total: 0 },
-      { status: 200 }
-    );
   } catch (error) {
     console.error('Error fetching signature count from Apps Script:', error);
     return Response.json(
