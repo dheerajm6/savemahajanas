@@ -1,18 +1,14 @@
-// Fallback in-memory counter for development
-let visitorCount = 0;
-
 export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => ({}));
     const { isNewVisitor } = body;
 
-    // If this is a new visitor, increment the count
-    if (isNewVisitor) {
-      visitorCount++;
-    }
-
-    // Try to log to Google Sheets for production
     const APPS_SCRIPT_URL = process.env.GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL;
+    const SHEET_ID = process.env.GOOGLE_SHEET_ID;
+
+    let visitorCount = 0;
+
+    // Log new visitor to Google Sheets
     if (APPS_SCRIPT_URL && isNewVisitor) {
       try {
         const timestamp = new Date().toLocaleString('en-US', {
@@ -36,10 +32,33 @@ export async function POST(request: Request) {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         }).catch(() => {
-          // Silently fail - we have in-memory fallback
+          // Silently fail - we have fallback
         });
       } catch (sheetsError) {
-        // Silently fail - visitor count still works with in-memory counter
+        // Silently fail
+      }
+    }
+
+    // Get visitor count from Google Sheets
+    if (APPS_SCRIPT_URL && SHEET_ID) {
+      try {
+        const params = new URLSearchParams({
+          action: 'getVisitorCount',
+          sheetId: SHEET_ID,
+        });
+
+        const response = await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        });
+
+        const data = await response.json();
+        visitorCount = data.count || 0;
+      } catch (error) {
+        console.error('Failed to get visitor count from Sheets:', error);
+        visitorCount = 0;
       }
     }
 

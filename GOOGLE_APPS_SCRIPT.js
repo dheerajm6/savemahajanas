@@ -10,6 +10,10 @@ function doPost(e) {
       return handleVisitorLog(e);
     }
 
+    if (action === 'getVisitorCount') {
+      return handleGetVisitorCount(e);
+    }
+
     // Otherwise, handle signature submission
     return handleSignature(e);
 
@@ -92,6 +96,31 @@ function handleVisitorLog(e) {
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({
       status: 'error',
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function handleGetVisitorCount(e) {
+  try {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    let visitorsSheet = spreadsheet.getSheetByName('Visitors');
+
+    let count = 0;
+    if (visitorsSheet) {
+      // Count all rows minus the header row
+      count = Math.max(0, visitorsSheet.getLastRow() - 1);
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      count: count
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      count: 0,
       message: error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
   }
