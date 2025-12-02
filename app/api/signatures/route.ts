@@ -21,10 +21,7 @@ export async function GET(request: Request) {
     });
 
     const response = await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+      method: 'GET',
     });
 
     if (response.ok) {
@@ -42,6 +39,8 @@ export async function GET(request: Request) {
     }
 
     console.warn('Apps Script returned non-ok status:', response.status);
+    const errorText = await response.text();
+    console.warn('Apps Script response body:', errorText);
     return Response.json(
       { students: 0, alumni: 0, public: 0, total: 0 },
       { status: 200 }

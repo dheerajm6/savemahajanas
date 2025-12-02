@@ -1,6 +1,30 @@
 // Google Apps Script to handle petition signature submissions and visitor tracking
 // Add this script to your Google Sheet
 
+function doGet(e) {
+  try {
+    const action = e.parameter.action;
+
+    if (action === 'getSignatureCount') {
+      return handleGetSignatureCount(e);
+    }
+
+    if (action === 'getVisitorCount') {
+      return handleGetVisitorCount(e);
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: 'Invalid action'
+    })).setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
 function doPost(e) {
   try {
     // Check if this is a visitor logging request
