@@ -46,9 +46,9 @@ function handleSignature(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // Get the active sheet (Signatures sheet)
+    // Get the active sheet (signed sheet)
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = spreadsheet.getSheetByName('Signatures') || spreadsheet.getActiveSheet();
+    const sheet = spreadsheet.getSheetByName('signed') || spreadsheet.getActiveSheet();
 
     // Append the new row with data
     sheet.appendRow([name, email, category, timestamp]);
