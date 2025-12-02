@@ -232,13 +232,6 @@ export default function MessageSection() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-lg">💌</span>
-                <div>
-                  <p className="font-semibold text-sm text-gray-900">Secure Delivery</p>
-                  <p className="text-xs text-gray-600 mt-1">Your message goes directly to savemahajanas@proton.me</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
                 <span className="text-lg">🤝</span>
                 <div>
                   <p className="font-semibold text-sm text-gray-900">Your Control</p>
