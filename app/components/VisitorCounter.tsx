@@ -31,10 +31,18 @@ export default function VisitorCounter() {
         const data = await response.json();
         setVisitors(data.count);
 
-        // Get the count of signatures from localStorage
-        const savedSignatures = localStorage.getItem('petitionSignatures');
-        const signatures = savedSignatures ? JSON.parse(savedSignatures) : [];
-        setSigned(signatures.length);
+        // Get total signature count from API (Google Sheets)
+        const signatureResponse = await fetch('/api/signatures', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (signatureResponse.ok) {
+          const signatureData = await signatureResponse.json();
+          setSigned(signatureData.total || 0);
+        }
       } catch (error) {
         console.error('Error tracking visitor:', error);
       } finally {
@@ -44,16 +52,27 @@ export default function VisitorCounter() {
 
     trackVisitor();
 
-    // Listen for signature updates
-    const handleSignatureAdded = () => {
-      const savedSignatures = localStorage.getItem('petitionSignatures');
-      const signatures = savedSignatures ? JSON.parse(savedSignatures) : [];
-      setSigned(signatures.length);
-    };
+    // Refresh signature count every 10 seconds
+    const interval = setInterval(async () => {
+      try {
+        const signatureResponse = await fetch('/api/signatures', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-    window.addEventListener('signatureAdded', handleSignatureAdded);
+        if (signatureResponse.ok) {
+          const signatureData = await signatureResponse.json();
+          setSigned(signatureData.total || 0);
+        }
+      } catch (error) {
+        console.error('Error updating signature count:', error);
+      }
+    }, 10000);
+
     return () => {
-      window.removeEventListener('signatureAdded', handleSignatureAdded);
+      clearInterval(interval);
     };
   }, []);
 
