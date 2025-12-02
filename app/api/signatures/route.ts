@@ -29,23 +29,25 @@ export async function GET(request: Request) {
 
     if (response.ok) {
       const data = await response.json();
+      console.log('Apps Script response:', data);
       return Response.json(
         {
           students: data.students || 0,
           alumni: data.alumni || 0,
           public: data.public || 0,
-          total: (data.students || 0) + (data.alumni || 0) + (data.public || 0),
+          total: data.total || (data.students || 0) + (data.alumni || 0) + (data.public || 0),
         },
         { status: 200 }
       );
     }
 
+    console.warn('Apps Script returned non-ok status:', response.status);
     return Response.json(
       { students: 0, alumni: 0, public: 0, total: 0 },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error fetching signature count:', error);
+    console.error('Error fetching signature count from Apps Script:', error);
     return Response.json(
       { students: 0, alumni: 0, public: 0, total: 0 },
       { status: 200 }
