@@ -133,7 +133,7 @@ function handleGetVisitorCount(e) {
 function handleGetSignatureCount(e) {
   try {
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const signaturesSheet = spreadsheet.getSheetByName('Signatures');
+    const signaturesSheet = spreadsheet.getSheetByName('signed');
 
     let studentCount = 0;
     let alumniCount = 0;
