@@ -8,6 +8,7 @@ import MemoSection from './components/MemoSection';
 import SignatureCounters from './components/SignatureCounters';
 import SignatureBoardSection from './components/SignatureBoardSection';
 import MemoriesSection from './components/MemoriesSection';
+import MessageSection from './components/MessageSection';
 
 export default function Home() {
   const [showConsent, setShowConsent] = useState(true);
@@ -66,6 +67,9 @@ export default function Home() {
 
       {/* Memories Section */}
       <MemoriesSection />
+
+      {/* Message Section */}
+      <MessageSection />
     </div>
   );
 }
